@@ -7,11 +7,13 @@
       inactive-text="关闭拖拽"
     >
     </el-switch
-    ><br />
-    <el-button v-if="allowDragB" type="info" @click="batchSave"
-      >批量保存</el-button
     >
-    <el-button type="danger" @click="batchDelete">批量删除</el-button>
+    <el-button v-if="allowDragB" type="info" @click="batchSave"
+       icon="el-icon-check" circle></el-button
+    >
+    <el-button type="danger" icon="el-icon-delete" circle @click="batchDelete"
+      ></el-button
+    >
     <el-tree
       :data="menu"
       :props="defaultProps"
@@ -128,7 +130,6 @@ export default {
       for (let i = 0; i < checkNodes.length; i++) {
         catIds.push(checkNodes[i].catId);
         catNames.push(checkNodes[i].name);
-
       }
       this.$confirm(`将批量删除[${catNames}], 是否继续?`, "提示", {
         confirmButtonText: "确定",
