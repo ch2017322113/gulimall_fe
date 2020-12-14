@@ -187,7 +187,7 @@ export default {
       };
       console.log("data", sendData);
       this.$http({
-        url: this.$http.adornUrl("/product/brand/update"),
+        url: this.$http.adornUrl("/product/brand/update/status"),
         method: "post",
         data: this.$http.adornData(sendData, false),
       }).then(({ data }) => {

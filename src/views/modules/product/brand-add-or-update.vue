@@ -30,7 +30,7 @@
           v-model="dataForm.showStatus"
           active-color="#13ce66"
           inactive-color="#ff4949"
-          @change="updateBrandStatus"
+          @change="updateBrandStatus()"
           :active-value="1"
           :inactive-value="0"
         >
@@ -98,7 +98,7 @@ export default {
             validator: (rule, value, callback) => {
               if (value === "") {
                 return callback(new Error("排序必须填写"));
-              } else if (!Number.isInteger(value) || value<0) {
+              } else if (!Number.isInteger(value) || value < 0) {
                 return callback(new Error("排序字段必须是非负整数"));
               } else {
                 callback();
@@ -112,6 +112,24 @@ export default {
     };
   },
   methods: {
+    updateBrandStatus(data) {
+      console.log("111", data);
+      let sendData = {
+        brandId: this.dataForm.brandId,
+        showStatus: this.dataForm.showStatus,
+      };
+      console.log("data", sendData);
+      this.$http({
+        url: this.$http.adornUrl("/product/brand/update/status"),
+        method: "post",
+        data: this.$http.adornData(sendData, false),
+      }).then(({ data }) => {
+        this.$message({
+          message: "状态保存成功",
+          type: "success",
+        });
+      });
+    },
     init(id) {
       this.dataForm.brandId = id || 0;
       this.visible = true;
@@ -172,9 +190,6 @@ export default {
           });
         }
       });
-    },
-    updateBrandStatus(status) {
-      console.log("switch", status);
     },
   },
 };
