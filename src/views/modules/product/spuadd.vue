@@ -128,8 +128,8 @@
                     v-show="false"
                   ></el-input>
                   <el-checkbox-group v-model="dataResp.tempSaleAttrs[aidx].attrValues">
+                    <!-- v-if="dataResp.saleAttrs[aidx].valueSelect !=1" -->
                     <el-checkbox
-                      v-if="dataResp.saleAttrs[aidx].valueSelect != ''"
                       :label="val"
                       v-for="val in dataResp.saleAttrs[aidx].valueSelect.split(';')"
                       :key="val"
@@ -349,6 +349,8 @@
 import CategoryCascader from "../common/category-cascader";
 import BrandSelect from "../common/brand-select";
 import MultiUpload from "@/components/upload/multiUpload";
+import PubSub from 'pubsub-js'
+
 export default {
   //import引入的组件需要注入到对象中才能使用
   components: { CategoryCascader, BrandSelect, MultiUpload },
